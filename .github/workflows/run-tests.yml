@@ -18,9 +18,9 @@ jobs:
       - name: Instalar dependencias del proyecto
         run: npm install
 
-      # Usamos la accion oficial de Microsoft para instalar navegadores de forma segura
-      - name: Instalar Navegadores Oficiales de Playwright
-        uses: microsoft/playwright-actions@v1
+      # Sintaxis oficial del CLI: descarga Chromium y las dependencias de Linux del sistema
+      - name: Instalar Navegador y Dependencias de Playwright
+        run: npx playwright install chromium --with-deps
 
       - name: Ejecutar simulacion en caliente
         env:
