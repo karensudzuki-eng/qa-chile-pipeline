@@ -1,0 +1,24 @@
+{
+  "name": "qa-chile-pipeline",
+  "version": "1.0.0",
+  "description": "",
+  "main": "simulacion.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karensudzuki-eng/qa-chile-pipeline.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/karensudzuki-eng/qa-chile-pipeline/issues"
+  },
+  "homepage": "https://github.com/karensudzuki-eng/qa-chile-pipeline#readme",
+  "dependencies": {
+    "playwright": "^1.64.0"
+  }
+}

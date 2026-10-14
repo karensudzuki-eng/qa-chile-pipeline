@@ -1,0 +1,27 @@
+name: QA Chile Pipeline E2E
+on:
+  repository_dispatch:
+    types: [run-qa-test] # Este es el evento que gatillará n8n
+
+jobs:
+  automation-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar codigo de GitHub
+        uses: actions/checkout@v4
+
+      - name: Configurar entorno de Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Instalar dependencias del proyecto
+        run: npm install
+
+      - name: Instalar Navegadores de Playwright
+        run: npx playwright install --with-deps
+
+      - name: Ejecutar simulacion en caliente
+        env:
+          TARGET_URL: ${{ github.event.client_payload.target_url }}
+        run: node simulacion.js
