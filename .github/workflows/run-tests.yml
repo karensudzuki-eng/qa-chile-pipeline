@@ -1,7 +1,7 @@
 name: QA Chile Pipeline E2E
 on:
   repository_dispatch:
-    types: [run-qa-test] # Este es el evento que gatillará n8n
+    types: [run-qa-test]
 
 jobs:
   automation-test:
@@ -18,9 +18,9 @@ jobs:
       - name: Instalar dependencias del proyecto
         run: npm install
 
-      - name: Instalar Navegadores de Playwright
-        run: npx playwright install chromium --with-deps
-
+      # Usamos la accion oficial de Microsoft para instalar navegadores de forma segura
+      - name: Instalar Navegadores Oficiales de Playwright
+        uses: microsoft/playwright-actions@v1
 
       - name: Ejecutar simulacion en caliente
         env:
