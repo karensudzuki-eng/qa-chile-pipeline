@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     # Levantamos el contenedor oficial de Microsoft con todo listo de fabrica
     container:
-      image: mcr.microsoft.com/playwright:v1.49.0-noble
+      image: mcr.microsoft.com/playwright:v1.64.0-noble
     steps:
       - name: Descargar codigo de GitHub
         uses: actions/checkout@v4
