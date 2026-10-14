@@ -19,7 +19,8 @@ jobs:
         run: npm install
 
       - name: Instalar Navegadores de Playwright
-        run: npx playwright install --with-deps
+        run: npx playwright install chromium --with-deps
+
 
       - name: Ejecutar simulacion en caliente
         env:
