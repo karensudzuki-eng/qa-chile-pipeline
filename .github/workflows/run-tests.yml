@@ -6,22 +6,17 @@ on:
 jobs:
   automation-test:
     runs-on: ubuntu-latest
+    # Levantamos el contenedor oficial de Microsoft con todo listo de fabrica
+    container:
+      image: mcr.microsoft.com/playwright:v1.49.0-noble
     steps:
       - name: Descargar codigo de GitHub
         uses: actions/checkout@v4
 
-      - name: Configurar entorno de Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
       - name: Instalar dependencias del proyecto
         run: npm install
 
-      # Sintaxis oficial del CLI: descarga Chromium y las dependencias de Linux del sistema
-      - name: Instalar Navegador y Dependencias de Playwright
-        run: npx playwright install chromium --with-deps
-
+      # Ya no necesitamos el comando "playwright install" porque el contenedor ya viene con Chromium listo!
       - name: Ejecutar simulacion en caliente
         env:
           TARGET_URL: ${{ github.event.client_payload.target_url }}
