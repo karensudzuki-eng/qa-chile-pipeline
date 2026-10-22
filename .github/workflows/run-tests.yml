@@ -19,5 +19,19 @@ jobs:
       # Ya no necesitamos el comando "playwright install" porque el contenedor ya viene con Chromium listo!
       - name: Ejecutar simulacion en caliente
         env:
-          TARGET_URL: ${{ github.event.client_payload.target_url }}
+          TARGET_URL: ${{ github.event.client_payload.ecommerce_url || github.event.client_payload.target_url }}
+          TRACKING_CODE: ${{ github.event.client_payload.tracking_code }}
+          CONTACT_EMAIL: ${{ github.event.client_payload.contact_email }}
         run: node simulacion.js
+
+      - name: Despachar reporte final por correo
+        if: always() # Garantiza el envío tanto si las pruebas pasaron como si fallaron
+        run: |
+          curl -s -X POST https://qachile.cl/api/send-report \
+            -H "Content-Type: application/json" \
+            -d '{
+              "tracking_code": "${{ github.event.client_payload.tracking_code }}",
+              "ecommerce_url": "${{ github.event.client_payload.ecommerce_url || github.event.client_payload.target_url }}",
+              "contact_email": "${{ github.event.client_payload.contact_email }}",
+              "status": "${{ job.status }}"
+            }'
